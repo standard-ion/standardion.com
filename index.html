@@ -348,21 +348,12 @@
                 <br>
 
                 <p class="copy">
-                    We started by analyzing a small subset of data provided to us by <a
-                        href="http://pivotal.io">Pivotal</a> from
-                    their <a href="http://run.pivotal.io/">Pivotal Web Services</a> platform.
-                    This is largest public <a href="https://www.cloudfoundry.org/">Cloud Foundry</a> platform currently
-                    in operation. Essentially, Cloud Foundry is and open-source well orchestrated container platform
-                    that allows many
-                    applications to scale easily in and out.
+                    We started by analyzing a small subset of data provided to us to scale easily in and out.
                     <br><br>
                     This data provided us insight into the nature of a completely container-based approach.
 
-                    We started by analyzing a general container metric which gave around 3,000 instances (containers)
-                    running on
-                    this particular Cloud Foundry foundation. We found that the mean instance CPU utilization was very
-                    low at around 2%.
-                    Each instance consumed the about 500 Mb or memory.
+                    We started by analyzing a general container metric which gave around 3,000 instances (batteries)
+                    running on a foundation.
                 </p>
                 <figure>
                     <img class="img-responsive" src="visualizations/cf-totals-avgs.png"
@@ -373,173 +364,6 @@
             </div>
 
 
-            <div class="">
-                <br><br>
-
-                <p class="copy">
-                    The next level of consolidation in the third platform will occur through application virtualization.
-                    Our goal was to identify how we could concentrate workloads to reduce energy consumption, so we
-                    began looking for application data we could use to identify patterns.
-                    <br>
-                    We were able to get a number
-                    of applications running on Pivotal Web Services. We added application performance monitoring by
-                    binding all our microservices to a free trial of <a href="https://newrelic.com/">New Relic</a>. The
-                    New Relic suite is superb at
-                    tracking web and service transaction metrics such as response time and throughput. However, after
-                    initial exploration, we found it very difficult to export the data in a way that we could identify
-                    individual application utilization.
-                </p>
-                <figure>
-                    <img class="img-responsive" src="visualizations/apm-app-new-relic-server-breakdown.png"
-                         alt="New Relic">
-                    <figcaption>
-                        Fig 3. - New Relic
-                    </figcaption>
-                </figure>
-
-            </div>
-
-
-            <div class="">
-                <br><br>
-
-                <p class="copy">
-                    Next we have a free subscription to <a href="https://app.datadoghq.com">DataDog</a>. We found the
-                    metrics were too high level for what we
-                    needed. They tended to be at the host/server level.
-                </p>
-                <figure>
-                    <img class="img-responsive" src="visualizations/apm-firehose.png"
-                         alt="">
-                    <figcaption>
-                        Fig 4. - DataDog
-                    </figcaption>
-                </figure>
-
-            </div>
-
-
-            <div class="">
-                <br><br>
-
-                <p class="copy">
-                    Since each application runs in it’s own container, we thought we could get equivalent data from a
-                    container solution. Coincidentally, we were given a demo of an internal Pivotal APM tool.
-                </p>
-                <figure>
-                    <img class="img-responsive" src="visualizations/apm-container-metrics-utilization.png"
-                         alt="">
-                    <figcaption>
-                        Fig 5. - Firehose nozzle container-level metrics
-                    </figcaption>
-                </figure>
-
-            </div>
-
-
-            <div class="">
-                <br><br>
-
-                <p class="copy">
-                    Although the product was not available, we found we were able to obtain container level metrics
-                    through a command line interface through the same application “nozzle” that this beautiful dashboard
-                    was using.<br>
-                    We installed a plugin that would export the metrics following the instructions at the <a
-                        href="https://github.com/cloudfoundry/firehose-plugin">firehose-plugin site</a>. Then we
-                    ran the following commands
-
-                    <pre>
-                    cf nozzle -f ContainerMetric > ContainerMetricPaaS4.txt
-                    cf nozzle -f ValueMetric > valueMetricSaaS2.txt which piped the output to a file.
-                    </pre>
-                </p>
-
-            </div>
-
-
-            <!-- ### Start copy from here to add a new section of image followed by analysis ### -->
-            <div class="">
-                <br><br>
-
-                <p class="copy">
-                    <!--Robert/Sean: Copy me to add a new section of analysis with a viz. See the "### Start copy" and "###
-                    End copy" comments in the code and just copy a new block for each. -->
-                    Just to get a sense of general performance across the different services, we plotted the three different
-                    readings: memory usage, disk usage, and CPU utilization. For easy readibility,
-                    we have removed the exact timestamps from our x-axis. Below is an example lot of disk usage for PaaS:
-
-
-
-
-
-                </p>
-                <figure>
-                    <img class="img-responsive" src="visualizations/diskPaaS.png"
-                         alt="">
-                    <figcaption>
-                        Fig #6. - Disk Usage Over Time, PaaS
-                    </figcaption>
-                </figure>
-
-            </div>
-            <!-- ### End copy from here to add a new section of image followed by analysis ### -->
-             <!-- ### Start copy from here to add a new section of image followed by analysis ### -->
-            <div class="">
-                <br><br>
-
-                <p class="copy">
-                    <!--Copy me to add a new section of analysis with a viz. See the "### Start copy" and "###
-                    End copy" comments in the code and just copy a new block for each. -->
-                    We took a look at our container data again, this time grouped by application, IP address, and Instance Index.
-                    Cloud Foundry assigns each application a UUID (Universally Unique Identifier) that we can use to identify a single application.
-                    Below is a sample plot of memory consumption, grouped by application.
-
-
-
-
-                </p>
-                <figure>
-                    <img class="img-responsive" src="visualizations/memoryPerApp.png"
-                         alt="">
-                    <figcaption>
-                        Fig #7. - Memory Usage per Application, PaaS
-                    </figcaption>
-                </figure>
-
-            </div>
-            <!-- ### End copy from here to add a new section of image followed by analysis ### -->
-
-
-            <!-- ### Start copy from here to add a new section of image followed by analysis ### -->
-            <div class="">
-                <br><br>
-
-                <p class="copy">
-                    <!--Robert/Sean: Copy me to add a new section of analysis with a viz. See the "### Start copy" and "###
-                    End copy" comments in the code and just copy a new block for each. -->
-                    We then analyzed some of the relationships between memory/disk usage and CPU utilization in more detail on
-                    an app by app basis. For further analysis, we should be concerned with instances and applications that appear in the top right or bottom left corners of these plots
-                    - areas where both CPU Utilization and Memory/Disk Usage are considered to be high or low.
-                    When a process is in this area, we can begin to consider scaling out compute resources. Likewise, if we are residing in an area
-                    with low usage for both, we can start to ratchet down compute resources to scale them in.
-                </p>
-                <figure>
-                    <img class="img-responsive" src="visualizations/cpuDiskPaaS.png"
-                         alt="">
-                    <figcaption>
-                        Fig #8. - CPU Vs. Disk Usage per Application, PaaS
-                    </figcaption>
-                </figure>
-                <figure>
-                    <img class="img-responsive" src="visualizations/cpuDiskSaaS.png"
-                         alt="">
-                    <figcaption>
-                        Fig #9. - CPU Vs. Disk Usage per Application, SaaS
-                    </figcaption>
-                </figure>
-
-            </div>
-            <!-- ### End copy from here to add a new section of image followed by analysis ### -->
 
             <!-- Please do not go below this line -->
         </div>
